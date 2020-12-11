@@ -1,0 +1,46 @@
+version: "3"
+services:
+  vyos-internet:
+    image: zdce/vyos:1.2.6-S1-20201203202805
+    privileged: true
+    volumes:
+      - ./scripts/startup-vyos-internet.sh:/config/scripts/vyos-postconfig-bootup.script
+    networks:
+      - switch
+
+  vyos-65001:
+    image: zdce/vyos:1.2.6-S1-20201203202805
+    privileged: true
+    volumes:
+      - ./scripts/startup-vyos-65001.sh:/config/scripts/vyos-postconfig-bootup.script
+    networks:
+      - switch
+
+  client-65001:
+    build: ./client
+    privileged: true
+    volumes:
+      - ./scripts/client-65001.sh:/start.sh
+    networks:
+      - switch
+
+  vyos-65002:
+    image: zdce/vyos:1.2.6-S1-20201203202805
+    privileged: true
+    volumes:
+      - ./scripts/startup-vyos-65002.sh:/config/scripts/vyos-postconfig-bootup.script
+    networks:
+      - switch
+
+  client-65002:
+    build: ./client
+    privileged: true
+    volumes:
+      - ./scripts/client-65002.sh:/start.sh
+    networks:
+      - switch
+
+networks:
+  switch:
+    driver: bridge
+
