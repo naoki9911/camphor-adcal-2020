@@ -40,6 +40,14 @@ services:
     networks:
       - switch
 
+  vyos-65003:
+    image: zdce/vyos:1.2.6-S1-20201203202805
+    privileged: true
+    volumes:
+      - ./scripts/startup-vyos-65003.sh:/config/scripts/vyos-postconfig-bootup.script
+    networks:
+      - switch
+
 networks:
   switch:
     driver: bridge

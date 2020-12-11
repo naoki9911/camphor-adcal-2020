@@ -20,16 +20,14 @@ set protocols static route 192.168.200.0/24 next-hop 192.168.1.6
 
 # 環境によって変えること
 set protocols static route 0.0.0.0/0 next-hop 172.19.0.1
-commit
 
 # configure nat
 set nat source rule 1001 outbound-interface eth0
 set nat source rule 1001 source address 192.168.100.0/24
 set nat source rule 1001 translation address masquerade
-commit
-
 set nat source rule 1002 outbound-interface eth0
 set nat source rule 1002 source address 192.168.200.0/24
 set nat source rule 1002 translation address masquerade
+
 commit
 exit
